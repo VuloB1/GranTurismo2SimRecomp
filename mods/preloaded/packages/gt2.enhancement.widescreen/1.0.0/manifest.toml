@@ -1,0 +1,22 @@
+format_version = 5
+id = "gt2.enhancement.widescreen"
+version = "1.0.0"
+name = "Gran Turismo 2 Widescreen"
+author = "GranTurismo2Recomp"
+description = "Renders Gran Turismo 2 in native 16:9 (experimental)."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SCUS-94488"
+
+[[feature]]
+id = "widescreen"
+name = "Widescreen"
+description = "Enable 16:9 widescreen rendering."
+group = "Display"
+default_enabled = true
+
+[[plugin]]
+feature = "widescreen"
+id = "gt2.widescreen.16-9"

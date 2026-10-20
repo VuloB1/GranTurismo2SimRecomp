@@ -1,0 +1,22 @@
+format_version = 5
+id = "gt2.enhancement.skip-fmvs"
+version = "1.0.0"
+name = "Gran Turismo 2 Skip FMVs"
+author = "GranTurismo2Recomp"
+description = "Plays cutscene movies at accelerated speed without audio so they pass almost instantly."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SCUS-94488"
+
+[[feature]]
+id = "skip-fmvs"
+name = "Skip FMVs"
+description = "Fast-forward the opening and cutscene movies."
+group = "Quality of Life"
+default_enabled = false
+
+[[plugin]]
+feature = "skip-fmvs"
+id = "gt2.fmv.skip"

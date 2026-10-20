@@ -6,11 +6,11 @@ name = "GranTurismo2Sim"
 id = "SCUS-94488"
 players = 2
 exe = "disc/SCUS_944.88"
-disc = "E:\\Claude apps\\psxrecomp-workspace\\discs\\GT2_sim\\Gran Turismo 2 (USA) (Simulation Mode) (v1.0).cue"
+disc = "disc/Gran Turismo 2 (USA) (Simulation Mode) (v1.0).cue"
 load_address = "0x80010000"
 entry_pc = "0x8005D570"
 text_size = "0x00099000"
-stack_base = "0x00000000"
+stack_base = "0x801FFFF0"
 
 # Digests are for data Track 01 (first BINARY FILE / TRACK 01).
 [prepare_disc]
@@ -30,6 +30,7 @@ known_crc32 = [
 ]
 
 [recompiler]
+mod_instruction_sites = ["0x8007B580", "0x8007B618"]
 seeds = "seeds/ghidra_funcs.txt"
 out_dir = "generated"
 strict = true
@@ -38,13 +39,21 @@ strict = true
 window_title = "GranTurismo2Sim Recompiled"
 memcard_dir = "saves"
 overlay_cache = true
+overlay_region_floor = "0x10000"
+idle_skip = true
 
 [video]
 renderer = "opengl"
 aspect_ratio = "4:3"
+internal_resolution = "1080p"
+texture_filtering = "bilinear"
+offer_skip_fmv = false
+pgxp_preserve_projection = true
+pgxp_depth_buffer = true
+pgxp_seam = "off"
 
 [controller]
-default_mode = "digital"
+default_mode = "analog"
 
 # Online mount gate: digests + track count + optional TOC fingerprint
 # (see docs/NETPLAY.md).
@@ -52,3 +61,49 @@ default_mode = "digital"
 require_cue = true
 required_tracks = 1
 required_disc_fp = "5ab2cf8c811b553752323c55caa4d16734d0d3cbc226b6f510be23e659c7461c"
+
+[widescreen]
+native_wide = true
+gte_game_mode = true
+
+[widescreen.cull]
+
+[[widescreen.cull.masked_reject]]
+address = "0x80018E28"
+expected = "0x1440000b"
+reject_mask = "0x80000000"
+
+[[widescreen.cull.masked_reject]]
+address = "0x80018F50"
+expected = "0x14400009"
+reject_mask = "0x80000000"
+
+[[widescreen.cull.masked_reject]]
+address = "0x80019030"
+expected = "0x1440000b"
+reject_mask = "0x80000000"
+
+[[widescreen.cull.masked_reject]]
+address = "0x80019154"
+expected = "0x14400009"
+reject_mask = "0x80000000"
+
+[[widescreen.cull.masked_reject]]
+address = "0x80019234"
+expected = "0x1440000b"
+reject_mask = "0x80000000"
+
+[[widescreen.cull.masked_reject]]
+address = "0x80019360"
+expected = "0x14400009"
+reject_mask = "0x80000000"
+
+[[widescreen.cull.masked_reject]]
+address = "0x80019454"
+expected = "0x1440000b"
+reject_mask = "0x80000000"
+
+[[widescreen.cull.masked_reject]]
+address = "0x80019584"
+expected = "0x14400009"
+reject_mask = "0x80000000"

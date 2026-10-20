@@ -23,6 +23,9 @@ project(GranTurismo2SimRecomp LANGUAGES C CXX)
 # endif()
 set(PSX_SETUP_WIZARD ON CACHE BOOL
     "Advertise first-run setup wizard + Generate & rebuild in recomp-ui" FORCE)
+# HLE batching draws semi-transparent textured runs as one dual-source draw; LLE
+# drew each one alone (thousands of draws on the course-selection map).
+set(PSX_GL_BATCH_IMPL "HLE" CACHE STRING "OpenGL textured batching" FORCE)
 include("${PSXRECOMP_ROOT}/runtime/runtime.cmake")
 
 # This project's own mod catalog. The FRAMEWORK stages it -- together with its
@@ -35,7 +38,12 @@ if(NOT IS_DIRECTORY "${PSX_PRELOADED_MODS}")
     set(PSX_PRELOADED_MODS "NONE")
 endif()
 
+file(GLOB GT2_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.c")
+
 psxrecomp_add_game_runtime(psx-runtime
+    PGXP
+    EXTRAS_SOURCES ${GT2_MOD_PLUGIN_SOURCES}
     PRELOADED_MODS_DIR "${PSX_PRELOADED_MODS}"
     # ENABLE_NETPLAY_IF_PRESENT
     # NETPLAY_LOBBY_URL ws://netplay.retcomm.net:8765
